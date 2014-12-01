@@ -59,65 +59,126 @@ namespace CalcSharp
             /// </summary>
             EQU = 9
         }
-        
-        public double argPrev = 0.0d;
-        public double argPres = 0.0d;
-        public int action = 0;
-        
+
+        public double sum = 0.0d;
+        public double arg = 0.0d;
+        public bool isAction = false;
+
+
+        public void ClearScreen()
+        {
+            TxtInput.Text = "0";
+            isAction = false;
+        }
+
+        public void ClearLastArgument()
+        {
+            arg = 0.0d;
+            ClearScreen();
+        }
+
+        public void DoBackspace()
+        {
+            string OldString;
+            string NewString;
+
+            OldString = TxtInput.Text;
+            NewString = OldString.Substring(0, OldString.Length - 1);
+
+            TxtInput.Text = NewString;
+        }
 
         public void AddDigit(string Digit)
         {
-            if (Digit == "." && TxtInput.Text.Contains(Digit)) 
+            if (Digit == "." && TxtInput.Text.Contains(Digit))
             {
                 return;
             }
 
 
-            if (TxtInput.Text == "0" && Digit != ".")
+            if (!isAction)
             {
-                TxtInput.Text = Digit;
+                if (TxtInput.Text == "0" && Digit != ".")
+                {
+                    TxtInput.Text = Digit;
+                }
+                else
+                {
+                    TxtInput.AppendText(Digit);
+                }
             }
             else
             {
-                TxtInput.AppendText(Digit);
+                ClearScreen();
+                AddDigit(Digit);
             }
         }
 
         public void DoAction(Actions a)
         {
+
+            try
+            {
+                arg = double.Parse(TxtInput.Text);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+
             switch (a)
             {
                 case Actions.ADD:
+                    sum += arg;
                     break;
 
                 case Actions.SUB:
+                    sum -= arg;
                     break;
 
                 case Actions.MULT:
+                    sum *= arg;
                     break;
 
                 case Actions.DIV:
+                    sum /= arg;
                     break;
 
                 case Actions.S_INV:
+                    arg *= -1;
                     break;
 
                 case Actions.N_INV:
+                    arg = 1 / arg;
                     break;
 
                 case Actions.PRCT:
+                    arg = sum * (arg / 100);
                     break;
 
                 case Actions.SQRT:
+                    arg = Math.Sqrt(arg);
+
                     break;
 
                 case Actions.EQU:
+                    if (sum == 0.0d && arg != 0.0d)
+                    {
+                        TxtInput.Text = Convert.ToString(arg);
+                    }
+                    else
+                    {
+                        TxtInput.Text = Convert.ToString(sum);
+                    }
                     break;
 
-                default: 
+                default:
                     System.Windows.Forms.MessageBox.Show("Błędnie działanie!");
                     break;
             }
+            isAction = true;
         }
 
         public Form1()
@@ -224,6 +285,11 @@ namespace CalcSharp
         private void BtnSqrt_Click(object sender, EventArgs e)
         {
             DoAction(Actions.SQRT);
+        }
+
+        private void BtnBksp_Click(object sender, EventArgs e)
+        {
+            DoBackspace();
         }
 
 

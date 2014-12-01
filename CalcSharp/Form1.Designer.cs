@@ -89,6 +89,7 @@
             this.BtnBksp.TabIndex = 2;
             this.BtnBksp.Text = "<-";
             this.BtnBksp.UseVisualStyleBackColor = true;
+            this.BtnBksp.Click += new System.EventHandler(this.BtnBksp_Click);
             // 
             // BtnCE
             // 

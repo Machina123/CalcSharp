@@ -14,54 +14,20 @@ namespace CalcSharp
 
         public enum Actions
         {
-            /// <summary>
-            /// Dodawanie
-            /// </summary>
             ADD = 1,
-
-            /// <summary>
-            /// Odejmowanie
-            /// </summary>
             SUB = 2,
-
-            /// <summary>
-            /// Mnożenie
-            /// </summary>
             MULT = 3,
-
-            /// <summary>
-            /// Dzielenie
-            /// </summary>
             DIV = 4,
-
-            /// <summary>
-            /// Odwracanie znaku
-            /// </summary>
             S_INV = 5,
-
-            /// <summary>
-            /// Odwracanie liczby
-            /// </summary>
             N_INV = 6,
-
-            /// <summary>
-            /// Procent
-            /// </summary>
             PRCT = 7,
-
-            /// <summary>
-            /// Pierwiastek kwadratowy
-            /// </summary>
             SQRT = 8,
-
-            /// <summary>
-            /// Równość
-            /// </summary>
             EQU = 9
         }
 
         public double sum = 0.0d;
         public double arg = 0.0d;
+        public Actions action;
         public bool isAction = false;
 
 

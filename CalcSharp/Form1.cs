@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace CalcSharp
 {
@@ -26,7 +27,8 @@ namespace CalcSharp
         }
 
         public double sum = 0.0d;
-        public double arg = 0.0d;
+        public double argN;
+        public double argP;
         public Actions action;
         public bool isAction = false;
 
@@ -39,8 +41,14 @@ namespace CalcSharp
 
         public void ClearLastArgument()
         {
-            arg = 0.0d;
+            argN = 0.0d;
             ClearScreen();
+        }
+
+        public void ClearAllArgs()
+        {
+            argN = 0.0d;
+            argP = 0.0d;
         }
 
         public void DoBackspace()
@@ -49,7 +57,14 @@ namespace CalcSharp
             string NewString;
 
             OldString = TxtInput.Text;
-            NewString = OldString.Substring(0, OldString.Length - 1);
+            if (OldString.Length > 1)
+            {
+                NewString = OldString.Substring(0, OldString.Length - 1);
+            }
+            else
+            {
+                NewString = "0";
+            }
 
             TxtInput.Text = NewString;
         }
@@ -83,6 +98,8 @@ namespace CalcSharp
         public void DoAction(Actions a)
         {
 
+            double arg = 0;
+
             try
             {
                 arg = double.Parse(TxtInput.Text);
@@ -91,60 +108,64 @@ namespace CalcSharp
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+                return;
             }
 
 
             switch (a)
             {
-                case Actions.ADD:
-                    sum += arg;
-                    break;
-
-                case Actions.SUB:
-                    sum -= arg;
-                    break;
-
-                case Actions.MULT:
-                    sum *= arg;
-                    break;
-
-                case Actions.DIV:
-                    sum /= arg;
-                    break;
 
                 case Actions.S_INV:
-                    arg *= -1;
+                    argN = -1 * arg;
+
                     break;
 
                 case Actions.N_INV:
-                    arg = 1 / arg;
+                    argN = 1 / arg;
                     break;
 
                 case Actions.PRCT:
-                    arg = sum * (arg / 100);
+                    argN = argP * (arg / 100);
                     break;
 
                 case Actions.SQRT:
-                    arg = Math.Sqrt(arg);
-
+                    argN = Math.Sqrt(arg);
                     break;
 
                 case Actions.EQU:
-                    if (sum == 0.0d && arg != 0.0d)
-                    {
-                        TxtInput.Text = Convert.ToString(arg);
-                    }
-                    else
-                    {
-                        TxtInput.Text = Convert.ToString(sum);
-                    }
+
                     break;
 
                 default:
-                    System.Windows.Forms.MessageBox.Show("Błędnie działanie!");
+                    action = a;
+
+                    if (!isAction)
+                    {
+                        argN = arg;
+                        isAction = true;
+                    }
+                    else
+                    {
+                        argP = argN;
+                        argN = arg;
+                    }
+
                     break;
             }
-            isAction = true;
+            DbgLabel1.Text = Convert.ToString(argP);
+            DbgLabel2.Text = Convert.ToString(argN);
+            DbgLabel3.Text = Convert.ToString(a);
+            DbgLabel4.Text = Convert.ToString(action);
+
+        }
+
+        public void DoMath(double arg1, double arg2, Actions a)
+        {
+            switch (a)
+            {
+                case Actions.ADD:
+                    break;
+            }
         }
 
         public Form1()
@@ -257,8 +278,6 @@ namespace CalcSharp
         {
             DoBackspace();
         }
-
-
 
     }
 }

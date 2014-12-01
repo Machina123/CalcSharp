@@ -58,6 +58,12 @@
             this.BtnD5 = new System.Windows.Forms.Button();
             this.BtnD6 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.DbgLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.DbgLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.DbgLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.DbgLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TxtInput
@@ -224,7 +230,7 @@
             // BtnDivide
             // 
             this.BtnDivide.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.BtnDivide.Location = new System.Drawing.Point(174, 117);
+            this.BtnDivide.Location = new System.Drawing.Point(174, 101);
             this.BtnDivide.Name = "BtnDivide";
             this.BtnDivide.Size = new System.Drawing.Size(48, 36);
             this.BtnDivide.TabIndex = 15;
@@ -376,11 +382,49 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "©2014 Machina";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DbgLabel1,
+            this.DbgLabel2,
+            this.DbgLabel3,
+            this.DbgLabel4});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 306);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(291, 22);
+            this.statusStrip1.TabIndex = 30;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // DbgLabel1
+            // 
+            this.DbgLabel1.Name = "DbgLabel1";
+            this.DbgLabel1.Size = new System.Drawing.Size(59, 17);
+            this.DbgLabel1.Text = "Operand1";
+            // 
+            // DbgLabel2
+            // 
+            this.DbgLabel2.Name = "DbgLabel2";
+            this.DbgLabel2.Size = new System.Drawing.Size(59, 17);
+            this.DbgLabel2.Text = "Operand2";
+            // 
+            // DbgLabel3
+            // 
+            this.DbgLabel3.Name = "DbgLabel3";
+            this.DbgLabel3.Size = new System.Drawing.Size(67, 17);
+            this.DbgLabel3.Text = "ActionNow";
+            // 
+            // DbgLabel4
+            // 
+            this.DbgLabel4.Name = "DbgLabel4";
+            this.DbgLabel4.Size = new System.Drawing.Size(64, 17);
+            this.DbgLabel4.Text = "DesiredAct";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 301);
+            this.ClientSize = new System.Drawing.Size(291, 328);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnD6);
             this.Controls.Add(this.BtnD5);
@@ -416,6 +460,8 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "CalcSharp";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,6 +499,11 @@
         private System.Windows.Forms.Button BtnD6;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox TxtInput;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel DbgLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel DbgLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel DbgLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel DbgLabel4;
     }
 }
 
